@@ -1,13 +1,6 @@
-FROM python:3.13-alpine
+FROM python:3.13-slim
 
-RUN apk add --no-cache \
-    gcc \
-    musl-dev \
-    python3-dev \
-    libffi-dev \
-    openssl-dev \
-    cargo \
-    build-base
+RUN apt-get update
 
 ENV CONTAINER_HOME=/usr/src/app/pb-mailer-service
 
