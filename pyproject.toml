@@ -1,0 +1,34 @@
+[project]
+name = "pb_mailer_service"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "VCSLAV"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "loguru (>=0.7.3,<0.8.0) ; python_version >= \"3.12\" and python_version < \"4.0\"",
+    "python-dotenv (>=1.1.1,<2.0.0)",
+    "jinja2 (>=3.1.6,<4.0.0)",
+    "aiokafka (>=0.12.0,<0.13.0)",
+    "aiosmtplib (>=4.0.1,<5.0.0)",
+    "aiohttp (>=3.12.14,<4.0.0)",
+    "avro (>=1.12.0,<2.0.0)",
+    "cachetools (>=6.1.0,<7.0.0)",
+    "pydantic (>=2.11.7,<3.0.0)",
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.3.0"
+mypy = "^1.17.0"
+pytest = "^8.4.1"
+pytest-cov = "^6.2.1"
+httpx = "^0.28.1"
+pytest-asyncio = "^1.1.0"
+
