@@ -1,6 +1,13 @@
 FROM python:3.13-alpine
 
-RUN apk add --no-cache git
+RUN apk add --no-cache \
+    gcc \
+    musl-dev \
+    python3-dev \
+    libffi-dev \
+    openssl-dev \
+    cargo \
+    build-base
 
 ENV CONTAINER_HOME=/usr/src/app/pb-mailer-service
 
