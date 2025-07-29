@@ -1,6 +1,6 @@
 FROM python:3.13-alpine
 
-RUN apt-get update && apt-get install -y git
+RUN apk add --no-cache git
 
 ENV CONTAINER_HOME=/usr/src/app/pb-mailer-service
 
