@@ -1,0 +1,19 @@
+services:
+  app:
+    image: registry.digitalocean.com/dplace/pb_mailer_service:latest
+    container_name: pb_mailer_service
+    restart: always
+    env_file:
+      - .env
+    command: ["python", "-m", "pb_mailer_service.main"]
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.docker/config.json:/config.json:ro
+    environment:
+      - DOCKER_CONFIG=/
+    command: pb_mailer_service --interval 5
