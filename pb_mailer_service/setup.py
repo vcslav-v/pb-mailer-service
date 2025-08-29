@@ -55,4 +55,25 @@ TOPICS_MAP = {
         template_path='billing/purchase_lifetime_upgrade.html',
         schema_model=schemas.billing.PurchaseLifetimeUpgrade
     ),
+    'revshare.product.approved': schemas.general.EmailData(
+        subject='🟢 Your Submission Has Been Approved',
+        short_subject='Product approved',
+        template_path='revshare/product_approved.html',
+        schema_model=schemas.revshare.ProductStatusApproved,
+        is_category_block=False
+    ),
+    'revshare.product.need_work': schemas.general.EmailData(
+        subject='🟡 Your Submission Needs Adjustments',
+        short_subject='Product needs work',
+        template_path='revshare/product_need_work.html',
+        schema_model=schemas.revshare.ProductStatusNeedWork,
+        is_category_block=False,
+    ),
+    'revshare.product.rejected': schemas.general.EmailData(
+        subject='🔴 Your Submission Not Approved',
+        short_subject='Product rejected',
+        template_path='revshare/product_rejected.html',
+        schema_model=schemas.revshare.ProductStatusRejected,
+        is_category_block=False
+    ),
 }

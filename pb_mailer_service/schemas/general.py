@@ -10,3 +10,4 @@ class EmailData(BaseModel):
     short_subject: str
     template_path: str
     schema_model: Type[EmailEvent]
+    is_category_block: bool = True
