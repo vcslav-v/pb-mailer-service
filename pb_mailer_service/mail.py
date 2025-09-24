@@ -5,7 +5,9 @@ from jinja2 import Environment, FileSystemLoader
 from pydantic import BaseModel
 
 from pb_mailer_service import avro, config
+from pb_mailer_service.buisness import email_postprocess
 from pb_mailer_service.schemas.general import EmailData
+import asyncio
 
 from random import randint
 
@@ -42,12 +44,29 @@ env.globals['subscription_img_urls'] = {
     'lifetime': 'https://pixelbuddha.ams3.cdn.digitaloceanspaces.com/mail-service/lifetime.jpeg',
 }
 
+env.globals['abandoned_coupon_code'] = {
+    'monthly': {'code': '5149-7303', 'discount': 10},
+    'yearly': {'code': 'Heat30', 'discount': 30},
+    'quarterly': {'code': 'Heat30', 'discount': 30},
+
+}
+
+env.globals['plus_price_cents'] = {
+    'monthly': 3000,
+    'quarterly': 6000,
+    'yearly': 12000,
+}
+
 
 async def process(
         raw_msg_data: bytes,
         mail_data: EmailData,
     ):
     msg_data = await avro.decode_avro_message(raw_msg_data, mail_data.schema_model)
+    msg_data, mail_data = email_postprocess(msg_data, mail_data)
+    if msg_data is None or mail_data is None:
+        await asyncio.sleep(1)
+        return
     html_content = _render_email(msg_data, mail_data)
     await _send_email(
         msg_data.email,

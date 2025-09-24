@@ -55,6 +55,12 @@ TOPICS_MAP = {
         template_path='billing/purchase_lifetime_upgrade.html',
         schema_model=schemas.billing.PurchaseLifetimeUpgrade
     ),
+    'billing.order.update': schemas.general.EmailData(
+        subject='We saved your order',
+        short_subject='We saved your order',
+        template_path='billing/order_created.html',
+        schema_model=schemas.billing.OrderUpdated,
+    ),
     'revshare.product.approved': schemas.general.EmailData(
         subject='🟢 Your Submission Has Been Approved',
         short_subject='Product approved',
