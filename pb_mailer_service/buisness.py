@@ -9,7 +9,7 @@ def email_postprocess(msg_data: T, mail_data: schemas.general.EmailData) -> tupl
     if isinstance(msg_data, schemas.billing.OrderUpdated):
         order = cast(schemas.billing.OrderUpdated, msg_data)
         is_subscription = order.subscription_id is not None
-        is_abandoned = order.status == schemas.billing.PaymentStatus.EXPIRED
+        is_abandoned = order.status == schemas.billing.PaymentStatus.EXPIRED or order.status == schemas.billing.PaymentStatus.CANCELLED
         if not is_subscription or not is_abandoned:
             return None, None
         is_coupon_used = order.coupon is not None
